@@ -115,6 +115,3 @@ http://127.0.0.1:5000/
 
 ## 👨‍💻 Author
 https://github.com/adeshkekde
-
-**Your Name**
-GitHub: https://github.com/your-username
