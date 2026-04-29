@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iris AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="main">
+
+    <h1 class="title">IRIS AI</h1>
+    <p class="subtitle">Flower Classification Engine</p>
+
+    <div class="grid">
+
+        <div class="input-box">
+            <input type="number" id="f1" required>
+            <label>Sepal Length</label>
+        </div>
+
+        <div class="input-box">
+            <input type="number" id="f2" required>
+            <label>Sepal Width</label>
+        </div>
+
+        <div class="input-box">
+            <input type="number" id="f3" required>
+            <label>Petal Length</label>
+        </div>
+
+        <div class="input-box">
+            <input type="number" id="f4" required>
+            <label>Petal Width</label>
+        </div>
+
+    </div>
+
+    <button onclick="predict()">PREDICT</button>
+
+    <div class="result" id="result">READY</div>
+
+</div>
+
+<script>
+function predict(){
+    const values = [
+        parseFloat(document.getElementById("f1").value || 0),
+        parseFloat(document.getElementById("f2").value || 0),
+        parseFloat(document.getElementById("f3").value || 0),
+        parseFloat(document.getElementById("f4").value || 0)
+    ];
+
+    fetch("/predict_api", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({values: values})
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("result").innerText = data.prediction;
+    });
+}
+</script>
+
+</body>
+</html>
